@@ -37,3 +37,14 @@ class SistemaReservas:
 
     def listar_participantes_taller(self, taller):
         return [p.nombre for p in taller.lista_inscritos]
+    
+class Profesor:
+    def __init__(self, nombre, especialidad):
+        self.nombre = nombre
+        self.especialidad = especialidad
+    
+    def asignar_taller(self, taller):
+        taller.profesor = self
+    
+    def obtener_talleres_asignados(self, sistema_reservas):
+        return [t for t in sistema_reservas.talleres if hasattr(t, 'profesor') and t.profesor == self]
